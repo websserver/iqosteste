@@ -8,11 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.3/dist/mindar-image-aframe.prod.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/color-switcher.js"></script>
     <script src="js/age-verification.js"></script>
-    <script src="js/camera-manager.js"></script>
     <style>
       .marker-lost-message {
         position: fixed;
@@ -307,23 +305,25 @@
 
 
     <script src="js/main.js"></script>
-    <script>
-      // Inicializa o gerenciador de câmera
-      window.addEventListener('load', () => {
-        CameraManager.init();
-      });
-    </script>
+    <script src="js/camera-manager.js"></script>
+    
 
-    <script>
-      target.addEventListener("targetLost", event => {
-        hideModelInfo();
-        document.querySelector('.marker-lost-message').style.display = 'block';
-      });
-
-      target.addEventListener("targetFound", event => {
-        document.querySelector('.marker-lost-message').style.display = 'none';
-        // Mostrar todos os modelos
-      });
-    </script>
   </body>
 </html>
+
+<script>
+  target.addEventListener("targetLost", event => {
+    hideModelInfo();
+    document.querySelector('.marker-lost-message').style.display = 'block';
+  });
+
+  target.addEventListener("targetFound", event => {
+    document.querySelector('.marker-lost-message').style.display = 'none';
+    // Mostrar todos os modelos
+  });
+
+  // Inicializa o gerenciador de câmera quando a página carrega
+  document.addEventListener('DOMContentLoaded', function() {
+        CameraManager.init();
+      });
+</script>
