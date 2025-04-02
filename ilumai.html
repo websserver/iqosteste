@@ -642,7 +642,6 @@
     <script src="js/color-switcher-iluma.js"></script>
     <script src="js/age-verification.js"></script>
     <script src="js/ilumai.js"></script>
-    <script src="js/camera-manager.js"></script>
     <script>
       // Inicializa a cor padrão como navy
       window.addEventListener('load', function() {
@@ -667,9 +666,10 @@
         document.querySelector('#modelo3d-1').object3D.visible = true;
       });
 
-      // Inicializa o gerenciador de câmera quando a página carrega
-      document.addEventListener('DOMContentLoaded', function() {
-        CameraManager.init();
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+          window.location.reload();
+        }
       });
     </script>
   </body>

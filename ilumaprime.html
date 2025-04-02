@@ -724,7 +724,6 @@
 
     <script src="js/ilumaprime.js"></script>
     <script src="js/color-switcher.js"></script>
-    <script src="js/camera-manager.js"></script>
     <script>
       // Inicializar o modelo 3D
       const modelContainer = document.querySelector('.model-container');
@@ -769,10 +768,12 @@
       modelViewer.addEventListener('error', (error) => {
         console.error('Erro ao carregar o modelo 3D:', error);
       });
-
-      // Inicializa o gerenciador de câmera quando a página carrega
-      document.addEventListener('DOMContentLoaded', function() {
-        CameraManager.init();
+    </script>
+    <script>
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+          window.location.reload();
+        }
       });
     </script>
   </body>
