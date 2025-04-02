@@ -459,13 +459,12 @@
       trackingTimeout: 3000;
       trackingResetTimeout: 6000;
       trackingResetThreshold: 0.3;
-      debugUIEnabled: false"
+      debugUIEnabled: true"
       color-space="sRGB" 
       renderer="colorManagement: true, physicallyCorrectLights" 
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      loading-screen="enabled: false"
-      stats="false">
+      loading-screen="enabled: false">
       <a-assets>
         <a-asset-item id="modelo" src="modelo3d/modelo3_prime/navy-blazer.glb"></a-asset-item>
       </a-assets>
@@ -773,32 +772,7 @@
 
       // Inicializa o gerenciador de câmera quando a página carrega
       document.addEventListener('DOMContentLoaded', function() {
-        // No iOS, aguarda o primeiro toque do usuário
-        if (CameraManager.IS_IOS) {
-          const startButton = document.createElement('button');
-          startButton.style.position = 'fixed';
-          startButton.style.top = '50%';
-          startButton.style.left = '50%';
-          startButton.style.transform = 'translate(-50%, -50%)';
-          startButton.style.padding = '15px 30px';
-          startButton.style.backgroundColor = '#00A0DC';
-          startButton.style.color = 'white';
-          startButton.style.border = 'none';
-          startButton.style.borderRadius = '25px';
-          startButton.style.fontSize = '16px';
-          startButton.style.fontFamily = 'IQOSSans-Bold, sans-serif';
-          startButton.style.zIndex = '9999';
-          startButton.textContent = 'Iniciar Experiência AR';
-          
-          startButton.addEventListener('click', function() {
-            CameraManager.requestCameraPermission();
-            startButton.remove();
-          });
-          
-          document.body.appendChild(startButton);
-        } else {
-          CameraManager.init();
-        }
+        CameraManager.init();
       });
     </script>
   </body>

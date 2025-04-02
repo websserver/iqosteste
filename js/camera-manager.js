@@ -104,4 +104,79 @@ const CameraManager = {
     clearStoredPermission: function() {
         localStorage.removeItem(this.CAMERA_STATE_KEY);
     }
-}; 
+};
+
+// Gerenciador de câmera AR para lidar com problemas de cache no iOS
+document.addEventListener('DOMContentLoaded', function() {
+    const sceneEl = document.querySelector('a-scene[mindar-image]');
+    if (!sceneEl) {
+        console.warn('Cena AR não encontrada');
+        return;
+    }
+
+    // Função para reiniciar o AR de forma segura
+    function restartAR() {
+        console.log('Tentando reiniciar AR...');
+        
+        // Verifica se o componente mindar-image existe
+        if (!sceneEl.components['mindar-image']) {
+            console.warn('Componente mindar-image não encontrado');
+            return;
+        }
+
+        try {
+            // Para o AR
+            console.log('Parando AR...');
+            sceneEl.components['mindar-image'].stop();
+            
+            // Espera um tempo maior para garantir que tudo foi limpo
+            setTimeout(() => {
+                console.log('Reiniciando AR...');
+                sceneEl.components['mindar-image'].start();
+                
+                // Força atualização da cena
+                if (sceneEl.object3D) {
+                    sceneEl.object3D.updateMatrix();
+                    sceneEl.object3D.updateMatrixWorld(true);
+                }
+                
+                // Verifica se há modelos 3D e força sua atualização
+                const models = document.querySelectorAll('a-entity[gltf-model]');
+                models.forEach(model => {
+                    if (model.object3D) {
+                        model.object3D.visible = true;
+                        model.object3D.updateMatrix();
+                        model.object3D.updateMatrixWorld(true);
+                    }
+                });
+            }, 500); // Aumentado para 500ms
+        } catch (error) {
+            console.error('Erro ao reiniciar AR:', error);
+        }
+    }
+
+    // Evento pageshow para lidar com restauração do cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            console.log('Página restaurada do cache, reiniciando AR...');
+            // Pequeno delay para garantir que a página está pronta
+            setTimeout(restartAR, 100);
+        }
+    });
+
+    // Evento visibilitychange para lidar com mudanças de visibilidade
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            console.log('Página tornou-se visível, verificando estado do AR...');
+            // Pequeno delay para garantir que a página está pronta
+            setTimeout(restartAR, 100);
+        }
+    });
+
+    // Evento focus para lidar com retorno ao app
+    window.addEventListener('focus', function() {
+        console.log('Janela recebeu foco, verificando estado do AR...');
+        // Pequeno delay para garantir que a página está pronta
+        setTimeout(restartAR, 100);
+    });
+}); 
