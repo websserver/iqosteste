@@ -10,6 +10,36 @@ const CameraManager = {
         setTimeout(() => {
             this.checkAndRequestPermission();
         }, this.PERMISSION_CHECK_DELAY);
+
+        // Adiciona listener para o evento pageshow (dispara quando a página é mostrada, incluindo ao voltar)
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // Se a página foi restaurada do cache (back-forward cache)
+                console.log('Página restaurada do cache, reativando câmera...');
+                this.reactivateCamera();
+            }
+        });
+    },
+
+    // Reativa a câmera após voltar para a página
+    reactivateCamera: async function() {
+        try {
+            // Limpa o estado armazenado para forçar uma nova verificação
+            this.clearStoredPermission();
+            
+            // Força a reativação da câmera
+            await this.requestCameraPermission();
+            
+            // Notifica o A-Frame para reativar a câmera
+            if (window.AFRAME) {
+                const scene = document.querySelector('a-scene');
+                if (scene) {
+                    scene.setAttribute('arjs', 'sourceType: webcam; sourceWidth: 1280; sourceHeight: 720; displayWidth: window.innerWidth; displayHeight: window.innerHeight;');
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao reativar câmera:', error);
+        }
     },
 
     // Verifica e solicita permissão se necessário
