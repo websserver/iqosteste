@@ -350,9 +350,26 @@
     </div>
 
     <a-scene
-      mindar-image="imageTargetSrc: ./targets/targets.mind; uiScanning: #scanning-overlay; uiLoading: no;"
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
+      mindar-image="imageTargetSrc: ./markers/targets.mind; 
+      filterMinCF: 0.0001; 
+      filterBeta: 0.001;
+      warmupTolerance: 30;
+      missTolerance: 5;
+      smoothCount: 80;
+      smoothTolerance: 0.005;
+      smoothThreshold: 0.5;
+      maxTrack: 1;
+      minDetectionConfidence: 0.1;
+      maxDetectionConfidence: 0.95;
+      trackingMethod: best;
+      trackingSmoothingFactor: 0.7;
+      trackingThreshold: 0.1;
+      trackingTimeout: 3000;
+      trackingResetTimeout: 6000;
+      trackingResetThreshold: 0.3;
+      debugUIEnabled: true"
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights, alpha: false" 
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
       loading-screen="enabled: false">
@@ -364,6 +381,7 @@
         <a-asset-item id="model-turquoise" src="modelo3d/modelo_IQOS ILUMA ONE/pastel-turquoise.glb"></a-asset-item>
       </a-assets>
 
+      <a-light type="directional" color="#ffffff" intensity="3" position="0 1 1"></a-light>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
@@ -371,45 +389,60 @@
         <a-entity
           id="modelo3d-navy"
           gltf-model="#model-navy"
-          position="0 -0.5 0.1"
+          position="0 0 0.1"
+          rotation="0 0 0"
           scale="8 8 8"
           visible="true"
+          class="clickable"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
         ></a-entity>
         
         <!-- Modelo Olive -->
         <a-entity
           id="modelo3d-olive"
           gltf-model="#model-olive"
-          position="0 -0.5 0.1"
+          position="0 0 0.1"
+          rotation="0 0 0"
           scale="8 8 8"
           visible="false"
+          class="clickable"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
         ></a-entity>
         
         <!-- Modelo Jacaranda -->
         <a-entity
           id="modelo3d-jacaranda"
           gltf-model="#model-jacaranda"
-          position="0 -0.5 0.1"
+          position="0 0 0.1"
+          rotation="0 0 0"
           scale="8 8 8"
           visible="false"
+          class="clickable"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
         ></a-entity>
         
         <!-- Modelo Rooibos -->
         <a-entity
           id="modelo3d-rooibos"
           gltf-model="#model-rooibos"
-          position="0 -0.5 0.1"
+          position="0 0 0.1"
+          rotation="0 0 0"
           scale="8 8 8"
           visible="false"
+          class="clickable"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
         ></a-entity>
         
         <!-- Modelo Turquoise -->
         <a-entity
           id="modelo3d-turquoise"
           gltf-model="#model-turquoise"
-          position="0 -0.5 0.1"
+          position="0 0 0.1"
+          rotation="0 0 0"
           scale="8 8 8"
           visible="false"
+          class="clickable"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
         ></a-entity>
       </a-entity>
     </a-scene>

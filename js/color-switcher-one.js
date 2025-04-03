@@ -27,20 +27,6 @@ function changeColor(color) {
     const selectedModel = document.querySelector(`#modelo3d-${color}`);
     if (selectedModel) {
         selectedModel.setAttribute('visible', 'true');
-        
-        // Adiciona uma animação de fade
-        selectedModel.setAttribute('animation', {
-            property: 'opacity',
-            from: 0,
-            to: 1,
-            dur: 300,
-            easing: 'easeInOutQuad'
-        });
-        
-        // Remove a animação após sua conclusão
-        setTimeout(() => {
-            selectedModel.removeAttribute('animation');
-        }, 300);
     }
 }
 
