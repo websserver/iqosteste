@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Elementos do DOM
   const loading = document.querySelector('.loading');
-  const modelo = document.querySelector("#modelo3d-1");
   const target = document.querySelector('a-entity[mindar-image-target]');
 
   // Função para esconder loading
@@ -15,17 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Eventos de detecção do marcador
   if (target) {
     target.addEventListener("targetFound", () => {
-      if (modelo) {
-        modelo.setAttribute('visible', 'true');
-        modelo.setAttribute('scale', '8 8 8');
+      // Mostra o modelo navy por padrão
+      const navyModel = document.querySelector("#modelo3d-navy");
+      if (navyModel) {
+        navyModel.setAttribute('visible', 'true');
         hideLoading();
       }
     });
 
     target.addEventListener("targetLost", () => {
-      if (modelo) {
-        modelo.setAttribute('visible', 'false');
-      }
+      // Esconde todos os modelos
+      const models = document.querySelectorAll('[id^="modelo3d-"]');
+      models.forEach(model => {
+        model.setAttribute('visible', 'false');
+      });
     });
   }
 

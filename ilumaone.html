@@ -468,8 +468,39 @@
 
     <script>
       const sceneEl = document.querySelector('a-scene');
-      const modeloEl = document.querySelector('#modelo3d-navy');
       const target = document.querySelector('a-entity[mindar-image-target]');
+
+      // Inicializa todos os modelos como invisíveis
+      document.addEventListener('DOMContentLoaded', function() {
+        const models = document.querySelectorAll('[id^="modelo3d-"]');
+        models.forEach(model => {
+          model.setAttribute('visible', 'false');
+        });
+      });
+
+      // Eventos de detecção do marcador
+      if (target) {
+        target.addEventListener("targetFound", () => {
+          // Mostra o modelo navy por padrão
+          const navyModel = document.querySelector("#modelo3d-navy");
+          if (navyModel) {
+            navyModel.setAttribute('visible', 'true');
+          }
+        });
+
+        target.addEventListener("targetLost", () => {
+          // Esconde todos os modelos
+          const models = document.querySelectorAll('[id^="modelo3d-"]');
+          models.forEach(model => {
+            model.setAttribute('visible', 'false');
+          });
+        });
+      }
+
+      // Adiciona listener para o evento de carregamento da cena
+      document.querySelector('a-scene').addEventListener('loaded', function () {
+        console.log('A-Frame scene loaded');
+      });
 
       // Componente para remover transparência
       AFRAME.registerComponent('remove-transparency', {
@@ -508,6 +539,7 @@
       });
 
       // Debug events com mais detalhes
+      const modeloEl = document.querySelector('#modelo3d-navy');
       modeloEl.addEventListener('model-loaded', function(event) {
         console.log('Modelo 3D carregado com sucesso', event);
         modeloEl.object3D.visible = true;
