@@ -380,15 +380,19 @@
       device-orientation-permission-ui="enabled: false"
       loading-screen="enabled: false">
       <a-assets>
-        <a-asset-item id="modelo" src="modelo3d/modelo2/navy-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-navy" src="modelo3d/modelo2/navy-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-olive" src="modelo3d/modelo2/olive-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-jacaranda" src="modelo3d/modelo2/jacaranda-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-rooibos" src="modelo3d/modelo2/rooibos-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-turquoise" src="modelo3d/modelo2/turquoise-blazer.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-entity 
-          id="modelo3d-1" 
-          gltf-model="#modelo"
+          id="modelo3d-navy" 
+          gltf-model="#modelo-navy"
           position="0 0 0.1" 
           rotation="0 0 0" 
           scale="8 8 8" 
@@ -396,6 +400,54 @@
           animation-mixer="loop: repeat"
           animation="property: position; dur: 300; easing: easeOutQuad"
           gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-olive" 
+          gltf-model="#modelo-olive"
+          position="0 0 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
+          class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-jacaranda" 
+          gltf-model="#modelo-jacaranda"
+          position="0 0 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
+          class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-rooibos" 
+          gltf-model="#modelo-rooibos"
+          position="0 0 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
+          class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-turquoise" 
+          gltf-model="#modelo-turquoise"
+          position="0 0 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
+          class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
+          visible="false">
         </a-entity>
       </a-entity>
     </a-scene>
@@ -416,71 +468,72 @@
 
     <script>
       const sceneEl = document.querySelector('a-scene');
-      const modeloEl = document.querySelector('#modelo3d-1');
+      const modelos = {
+        navy: document.querySelector('#modelo3d-navy'),
+        olive: document.querySelector('#modelo3d-olive'),
+        jacaranda: document.querySelector('#modelo3d-jacaranda'),
+        rooibos: document.querySelector('#modelo3d-rooibos'),
+        turquoise: document.querySelector('#modelo3d-turquoise')
+      };
       const target = document.querySelector('a-entity[mindar-image-target]');
+      let currentColor = 'navy';
+
+      // Função para trocar a cor do modelo
+      function changeColor(color) {
+        // Esconde o modelo atual
+        modelos[currentColor].setAttribute('visible', 'false');
+        // Mostra o novo modelo
+        modelos[color].setAttribute('visible', 'true');
+        currentColor = color;
+      }
 
       // Debug events com mais detalhes
-      modeloEl.addEventListener('model-loaded', function(event) {
-        console.log('Modelo 3D carregado com sucesso', event);
-        modeloEl.object3D.visible = true;
-        
-        // Forçar atualização da matriz mundial
-        modeloEl.object3D.updateMatrix();
-        modeloEl.object3D.updateMatrixWorld(true);
+      Object.values(modelos).forEach(modelo => {
+        modelo.addEventListener('model-loaded', function(event) {
+          console.log('Modelo 3D carregado com sucesso', event);
+          modelo.object3D.visible = modelo.getAttribute('visible') === 'true';
+          modelo.object3D.updateMatrix();
+          modelo.object3D.updateMatrixWorld(true);
+        });
+
+        modelo.addEventListener('model-error', function(error) {
+          console.error('Erro ao carregar o modelo 3D:', error);
+        });
       });
 
-      modeloEl.addEventListener('model-error', function(error) {
-        console.error('Erro ao carregar o modelo 3D:', error);
-        // Tentar recarregar o modelo
-        const modelUrl = modeloEl.getAttribute('gltf-model');
-        setTimeout(() => {
-          console.log('Tentando recarregar o modelo...');
-          modeloEl.setAttribute('gltf-model', '');
-          setTimeout(() => {
-            modeloEl.setAttribute('gltf-model', modelUrl);
-          }, 1000);
-        }, 2000);
-      });
+      // Eventos de detecção do marcador
+      if (target) {
+        target.addEventListener("targetFound", () => {
+          Object.values(modelos).forEach(modelo => {
+            modelo.setAttribute('visible', modelo.id === `modelo3d-${currentColor}`);
+          });
+          hideLoading();
+        });
+
+        target.addEventListener("targetLost", () => {
+          Object.values(modelos).forEach(modelo => {
+            modelo.setAttribute('visible', 'false');
+          });
+        });
+      }
+
+      // Esconder loading após 5 segundos (fallback)
+      setTimeout(hideLoading, 5000);
 
       sceneEl.addEventListener('arReady', function() {
         console.log('MindAR está pronto');
         // Verificar se o modelo está visível
         console.log('Estado do modelo:', {
-          visible: modeloEl.getAttribute('visible'),
-          object3DVisible: modeloEl.object3D.visible,
-          position: modeloEl.object3D.position,
-          rotation: modeloEl.object3D.rotation,
-          scale: modeloEl.object3D.scale
+          visible: modelos[currentColor].getAttribute('visible'),
+          object3DVisible: modelos[currentColor].object3D.visible,
+          position: modelos[currentColor].object3D.position,
+          rotation: modelos[currentColor].object3D.rotation,
+          scale: modelos[currentColor].object3D.scale
         });
       });
 
       sceneEl.addEventListener('arError', function(error) {
         console.error('Erro no MindAR:', error);
-      });
-
-      // Target events com mais informações
-      target.addEventListener('targetFound', function() {
-        console.log('Marcador encontrado');
-        modeloEl.object3D.visible = true;
-        document.querySelector('.marker-lost-message').style.display = 'none';
-        
-        // Forçar atualização das matrizes
-        modeloEl.object3D.updateMatrix();
-        modeloEl.object3D.updateMatrixWorld(true);
-        
-        console.log('Estado após encontrar marcador:', {
-          modelVisible: modeloEl.getAttribute('visible'),
-          modelObject3DVisible: modeloEl.object3D.visible,
-          modelPosition: modeloEl.object3D.position,
-          modelRotation: modeloEl.object3D.rotation,
-          modelScale: modeloEl.object3D.scale
-        });
-      });
-
-      target.addEventListener('targetLost', function() {
-        console.log('Marcador perdido');
-        modeloEl.object3D.visible = false;
-        document.querySelector('.marker-lost-message').style.display = 'block';
       });
 
       AFRAME.registerComponent('gesture-handler-custom', {
@@ -622,21 +675,10 @@
       // Garantir visibilidade do modelo quando a cena estiver pronta
       sceneEl.addEventListener('loaded', function() {
         console.log('Cena carregada - verificando visibilidade');
-        modeloEl.object3D.visible = true;
-      });
-
-      function changeColor(color) {
-        // Remover classe active de todas as opções
-        document.querySelectorAll('.color-option').forEach(option => {
-          option.classList.remove('active');
+        Object.values(modelos).forEach(modelo => {
+          modelo.object3D.visible = true;
         });
-        
-        // Adicionar classe active à opção selecionada
-        document.querySelector(`[data-color="${color}"]`).classList.add('active');
-        
-        // Aqui você pode adicionar lógica adicional para mudar a cor do modelo 3D
-        console.log('Cor selecionada:', color);
-      }
+      });
     </script>
 
     <script src="js/color-switcher-iluma.js"></script>
@@ -663,7 +705,9 @@
       // Monitora o estado da cena
       document.querySelector('a-scene').addEventListener('loaded', function () {
         console.log('A-Frame scene loaded');
-        document.querySelector('#modelo3d-1').object3D.visible = true;
+        Object.values(modelos).forEach(modelo => {
+          modelo.object3D.visible = true;
+        });
       });
 
       window.addEventListener("pageshow", function (event) {

@@ -374,76 +374,87 @@
       device-orientation-permission-ui="enabled: false"
       loading-screen="enabled: false">
       <a-assets>
-        <a-asset-item id="model-navy" src="modelo3d/modelo_IQOS ILUMA ONE/navy-blazer.glb"></a-asset-item>
-        <a-asset-item id="model-olive" src="modelo3d/modelo_IQOS ILUMA ONE/olive-green.glb"></a-asset-item>
-        <a-asset-item id="model-jacaranda" src="modelo3d/modelo_IQOS ILUMA ONE/jacaranda.glb"></a-asset-item>
-        <a-asset-item id="model-rooibos" src="modelo3d/modelo_IQOS ILUMA ONE/rooibos-tea.glb"></a-asset-item>
-        <a-asset-item id="model-turquoise" src="modelo3d/modelo_IQOS ILUMA ONE/pastel-turquoise.glb"></a-asset-item>
+        <a-asset-item id="modelo-navy" src="modelo3d/modelo_IQOS ILUMA ONE/navy-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-olive" src="modelo3d/modelo_IQOS ILUMA ONE/olive-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-jacaranda" src="modelo3d/modelo_IQOS ILUMA ONE/jacaranda-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-rooibos" src="modelo3d/modelo_IQOS ILUMA ONE/rooibos-blazer.glb"></a-asset-item>
+        <a-asset-item id="modelo-turquoise" src="modelo3d/modelo_IQOS ILUMA ONE/turquoise-blazer.glb"></a-asset-item>
       </a-assets>
 
       <a-light type="directional" color="#ffffff" intensity="3" position="0 1 1"></a-light>
+
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Modelo Navy (padrão) -->
-        <a-entity
-          id="modelo3d-navy"
-          gltf-model="#model-navy"
-          position="0 0 0.1"
-          rotation="0 0 0"
-          scale="8 8 8"
-          visible="true"
+        <a-entity 
+          id="modelo3d-navy" 
+          gltf-model="#modelo-navy"
+          position="0 -0.5 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
           class="clickable"
-          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
-        ></a-entity>
-        
-        <!-- Modelo Olive -->
-        <a-entity
-          id="modelo3d-olive"
-          gltf-model="#model-olive"
-          position="0 0 0.1"
-          rotation="0 0 0"
-          scale="8 8 8"
-          visible="false"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          material="transparent: false; opacity: 1; depthWrite: true; depthTest: true; blending: NoBlending"
+          remove-transparency
+          gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-olive" 
+          gltf-model="#modelo-olive"
+          position="0 -0.5 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
           class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          material="transparent: false; opacity: 1; depthWrite: true; depthTest: true; blending: NoBlending"
+          remove-transparency
           gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
-        ></a-entity>
-        
-        <!-- Modelo Jacaranda -->
-        <a-entity
-          id="modelo3d-jacaranda"
-          gltf-model="#model-jacaranda"
-          position="0 0 0.1"
-          rotation="0 0 0"
-          scale="8 8 8"
-          visible="false"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-jacaranda" 
+          gltf-model="#modelo-jacaranda"
+          position="0 -0.5 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
           class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          material="transparent: false; opacity: 1; depthWrite: true; depthTest: true; blending: NoBlending"
+          remove-transparency
           gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
-        ></a-entity>
-        
-        <!-- Modelo Rooibos -->
-        <a-entity
-          id="modelo3d-rooibos"
-          gltf-model="#model-rooibos"
-          position="0 0 0.1"
-          rotation="0 0 0"
-          scale="8 8 8"
-          visible="false"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-rooibos" 
+          gltf-model="#modelo-rooibos"
+          position="0 -0.5 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
           class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          material="transparent: false; opacity: 1; depthWrite: true; depthTest: true; blending: NoBlending"
+          remove-transparency
           gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
-        ></a-entity>
-        
-        <!-- Modelo Turquoise -->
-        <a-entity
-          id="modelo3d-turquoise"
-          gltf-model="#model-turquoise"
-          position="0 0 0.1"
-          rotation="0 0 0"
-          scale="8 8 8"
-          visible="false"
+          visible="false">
+        </a-entity>
+        <a-entity 
+          id="modelo3d-turquoise" 
+          gltf-model="#modelo-turquoise"
+          position="0 -0.5 0.1" 
+          rotation="0 0 0" 
+          scale="8 8 8" 
           class="clickable"
+          animation-mixer="loop: repeat"
+          animation="property: position; dur: 300; easing: easeOutQuad"
+          material="transparent: false; opacity: 1; depthWrite: true; depthTest: true; blending: NoBlending"
+          remove-transparency
           gesture-handler-custom="minScale: 4; maxScale: 12; rotationSensitivity: 0.2; scaleSensitivity: 0.08"
-        ></a-entity>
+          visible="false">
+        </a-entity>
       </a-entity>
     </a-scene>
 
@@ -468,295 +479,57 @@
 
     <script>
       const sceneEl = document.querySelector('a-scene');
+      const modelos = {
+        navy: document.querySelector('#modelo3d-navy'),
+        olive: document.querySelector('#modelo3d-olive'),
+        jacaranda: document.querySelector('#modelo3d-jacaranda'),
+        rooibos: document.querySelector('#modelo3d-rooibos'),
+        turquoise: document.querySelector('#modelo3d-turquoise')
+      };
       const target = document.querySelector('a-entity[mindar-image-target]');
+      let currentColor = 'navy';
 
-      // Inicializa todos os modelos como invisíveis
-      document.addEventListener('DOMContentLoaded', function() {
-        const models = document.querySelectorAll('[id^="modelo3d-"]');
-        models.forEach(model => {
-          model.setAttribute('visible', 'false');
+      // Função para trocar a cor do modelo
+      function changeColor(color) {
+        // Esconde o modelo atual
+        modelos[currentColor].setAttribute('visible', 'false');
+        // Mostra o novo modelo
+        modelos[color].setAttribute('visible', 'true');
+        currentColor = color;
+      }
+
+      // Debug events com mais detalhes
+      Object.values(modelos).forEach(modelo => {
+        modelo.addEventListener('model-loaded', function(event) {
+          console.log('Modelo 3D carregado com sucesso', event);
+          modelo.object3D.visible = modelo.getAttribute('visible') === 'true';
+          modelo.object3D.updateMatrix();
+          modelo.object3D.updateMatrixWorld(true);
+        });
+
+        modelo.addEventListener('model-error', function(error) {
+          console.error('Erro ao carregar o modelo 3D:', error);
         });
       });
 
       // Eventos de detecção do marcador
       if (target) {
         target.addEventListener("targetFound", () => {
-          // Mostra o modelo navy por padrão
-          const navyModel = document.querySelector("#modelo3d-navy");
-          if (navyModel) {
-            navyModel.setAttribute('visible', 'true');
-          }
+          Object.values(modelos).forEach(modelo => {
+            modelo.setAttribute('visible', modelo.id === `modelo3d-${currentColor}`);
+          });
+          hideLoading();
         });
 
         target.addEventListener("targetLost", () => {
-          // Esconde todos os modelos
-          const models = document.querySelectorAll('[id^="modelo3d-"]');
-          models.forEach(model => {
-            model.setAttribute('visible', 'false');
+          Object.values(modelos).forEach(modelo => {
+            modelo.setAttribute('visible', 'false');
           });
         });
       }
 
-      // Adiciona listener para o evento de carregamento da cena
-      document.querySelector('a-scene').addEventListener('loaded', function () {
-        console.log('A-Frame scene loaded');
-      });
-
-      // Componente para remover transparência
-      AFRAME.registerComponent('remove-transparency', {
-        init: function() {
-          this.el.addEventListener('model-loaded', () => {
-            const model = this.el.getObject3D('mesh');
-            if (model) {
-              model.traverse((node) => {
-                if (node.isMesh && node.material) {
-                  // Força o material a ser opaco
-                  node.material.transparent = false;
-                  node.material.opacity = 1;
-                  node.material.depthWrite = true;
-                  node.material.depthTest = true;
-                  node.material.blending = THREE.NoBlending;
-                  node.material.alphaTest = 1;
-                  node.material.side = THREE.DoubleSide;
-                  
-                  // Se for um array de materiais
-                  if (Array.isArray(node.material)) {
-                    node.material.forEach(material => {
-                      material.transparent = false;
-                      material.opacity = 1;
-                      material.depthWrite = true;
-                      material.depthTest = true;
-                      material.blending = THREE.NoBlending;
-                      material.alphaTest = 1;
-                      material.side = THREE.DoubleSide;
-                    });
-                  }
-                }
-              });
-            }
-          });
-        }
-      });
-
-      // Debug events com mais detalhes
-      const modeloEl = document.querySelector('#modelo3d-navy');
-      modeloEl.addEventListener('model-loaded', function(event) {
-        console.log('Modelo 3D carregado com sucesso', event);
-        modeloEl.object3D.visible = true;
-        
-        // Forçar atualização da matriz mundial
-        modeloEl.object3D.updateMatrix();
-        modeloEl.object3D.updateMatrixWorld(true);
-      });
-
-      modeloEl.addEventListener('model-error', function(error) {
-        console.error('Erro ao carregar o modelo 3D:', error);
-        // Tentar recarregar o modelo
-        const modelUrl = modeloEl.getAttribute('gltf-model');
-        setTimeout(() => {
-          console.log('Tentando recarregar o modelo...');
-          modeloEl.setAttribute('gltf-model', '');
-          setTimeout(() => {
-            modeloEl.setAttribute('gltf-model', modelUrl);
-          }, 1000);
-        }, 2000);
-      });
-
-      sceneEl.addEventListener('arReady', function() {
-        console.log('MindAR está pronto');
-        // Verificar se o modelo está visível
-        console.log('Estado do modelo:', {
-          visible: modeloEl.getAttribute('visible'),
-          object3DVisible: modeloEl.object3D.visible,
-          position: modeloEl.object3D.position,
-          rotation: modeloEl.object3D.rotation,
-          scale: modeloEl.object3D.scale
-        });
-      });
-
-      sceneEl.addEventListener('arError', function(error) {
-        console.error('Erro no MindAR:', error);
-      });
-
-      // Target events com mais informações
-      target.addEventListener('targetFound', function() {
-        console.log('Marcador encontrado');
-        modeloEl.object3D.visible = true;
-        document.querySelector('.marker-lost-message').style.display = 'none';
-        
-        // Forçar atualização das matrizes
-        modeloEl.object3D.updateMatrix();
-        modeloEl.object3D.updateMatrixWorld(true);
-        
-        console.log('Estado após encontrar marcador:', {
-          modelVisible: modeloEl.getAttribute('visible'),
-          modelObject3DVisible: modeloEl.object3D.visible,
-          modelPosition: modeloEl.object3D.position,
-          modelRotation: modeloEl.object3D.rotation,
-          modelScale: modeloEl.object3D.scale
-        });
-      });
-
-      target.addEventListener('targetLost', function() {
-        console.log('Marcador perdido');
-        modeloEl.object3D.visible = false;
-        document.querySelector('.marker-lost-message').style.display = 'block';
-      });
-
-      AFRAME.registerComponent('gesture-handler-custom', {
-        schema: {
-          minScale: { type: 'number', default: 4 },
-          maxScale: { type: 'number', default: 12 },
-          rotationSensitivity: { type: 'number', default: 0.3 },
-          scaleSensitivity: { type: 'number', default: 0.1 }
-        },
-        init: function() {
-          this.touchStartX = 0;
-          this.touchStartY = 0;
-          this.touchStartDistance = 0;
-          this.currentRotation = { x: 0, y: 0, z: 0 };
-          this.currentScale = 8;
-          
-          this.el.addEventListener('touchstart', this.onTouchStart.bind(this));
-          this.el.addEventListener('touchmove', this.onTouchMove.bind(this));
-          this.el.addEventListener('touchend', this.onTouchEnd.bind(this));
-
-          sceneEl.addEventListener('touchstart', this.onTouchStart.bind(this));
-          sceneEl.addEventListener('touchmove', this.onTouchMove.bind(this));
-          sceneEl.addEventListener('touchend', this.onTouchEnd.bind(this));
-        },
-        onTouchStart: function(event) {
-          const isVisible = this.el.getAttribute('visible');
-          if (!isVisible) return;
-
-          if (event.touches.length === 1) {
-            this.touchStartX = event.touches[0].clientX;
-            this.touchStartY = event.touches[0].clientY;
-          } else if (event.touches.length === 2) {
-            this.touchStartDistance = Math.hypot(
-              event.touches[0].clientX - event.touches[1].clientX,
-              event.touches[0].clientY - event.touches[1].clientY
-            );
-          }
-        },
-        onTouchMove: function(event) {
-          event.preventDefault();
-          
-          const isVisible = this.el.getAttribute('visible');
-          if (!isVisible) return;
-          
-          if (event.touches.length === 1) {
-            const deltaX = event.touches[0].clientX - this.touchStartX;
-            const deltaY = event.touches[0].clientY - this.touchStartY;
-            
-            this.currentRotation.y += deltaX * this.data.rotationSensitivity;
-            this.currentRotation.x += deltaY * this.data.rotationSensitivity;
-            
-            this.el.setAttribute('rotation', this.currentRotation);
-            
-            this.touchStartX = event.touches[0].clientX;
-            this.touchStartY = event.touches[0].clientY;
-          } else if (event.touches.length === 2) {
-            const currentDistance = Math.hypot(
-              event.touches[0].clientX - event.touches[1].clientX,
-              event.touches[0].clientY - event.touches[1].clientY
-            );
-            
-            const delta = currentDistance - this.touchStartDistance;
-            this.currentScale = Math.max(
-              this.data.minScale,
-              Math.min(this.data.maxScale, this.currentScale + delta * this.data.scaleSensitivity)
-            );
-            
-            this.el.setAttribute('scale', `${this.currentScale} ${this.currentScale} ${this.currentScale}`);
-            this.touchStartDistance = currentDistance;
-          }
-        },
-        onTouchEnd: function(event) {
-          this.touchStartX = 0;
-          this.touchStartY = 0;
-          this.touchStartDistance = 0;
-        }
-      });
-
-      // Componente para suavizar a posição
-      AFRAME.registerComponent('smooth-position', {
-        schema: {
-          smoothFactor: { type: 'number', default: 0.3 }
-        },
-
-        init: function() {
-          this.targetPosition = new THREE.Vector3();
-          this.currentPosition = new THREE.Vector3();
-          this.velocity = new THREE.Vector3();
-        },
-
-        tick: function() {
-          const currentWorldPos = this.el.object3D.getWorldPosition(new THREE.Vector3());
-          
-          // Suavizar a posição
-          this.currentPosition.lerp(currentWorldPos, this.data.smoothFactor);
-          this.el.object3D.position.copy(this.currentPosition);
-        }
-      });
-
-      // Componente para suavizar a rotação
-      AFRAME.registerComponent('smooth-rotation', {
-        schema: {
-          smoothFactor: { type: 'number', default: 0.3 }
-        },
-
-        init: function() {
-          this.currentRotation = new THREE.Quaternion();
-        },
-
-        tick: function() {
-          const currentWorldQuat = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
-          
-          // Suavizar a rotação
-          this.currentRotation.slerp(currentWorldQuat, this.data.smoothFactor);
-          this.el.object3D.setRotationFromQuaternion(this.currentRotation);
-        }
-      });
-
-      // Componente de estabilização geral
-      AFRAME.registerComponent('stabilizer', {
-        init: function() {
-          this.lastPosition = new THREE.Vector3();
-          this.lastRotation = new THREE.Euler();
-          this.smoothingFactor = 0.3;
-        },
-        
-        tick: function() {
-          const object3D = this.el.object3D;
-          
-          // Aplicar suavização simples
-          object3D.position.lerp(this.lastPosition, this.smoothingFactor);
-          
-          // Atualizar últimas posições
-          this.lastPosition.copy(object3D.position);
-          this.lastRotation.copy(object3D.rotation);
-        }
-      });
-
-      // Garantir visibilidade do modelo quando a cena estiver pronta
-      sceneEl.addEventListener('loaded', function() {
-        console.log('Cena carregada - verificando visibilidade');
-        modeloEl.object3D.visible = true;
-      });
-
-      function changeColor(color) {
-        // Remover classe active de todas as opções
-        document.querySelectorAll('.color-option').forEach(option => {
-          option.classList.remove('active');
-        });
-        
-        // Adicionar classe active à opção selecionada
-        document.querySelector(`[data-color="${color}"]`).classList.add('active');
-        
-        // Aqui você pode adicionar lógica adicional para mudar a cor do modelo 3D
-        console.log('Cor selecionada:', color);
-      }
+      // Esconder loading após 5 segundos (fallback)
+      setTimeout(hideLoading, 5000);
     </script>
 
     <script src="js/color-switcher-one.js"></script>
@@ -783,7 +556,7 @@
       // Monitora o estado da cena
       document.querySelector('a-scene').addEventListener('loaded', function () {
         console.log('A-Frame scene loaded');
-        document.querySelector('#modelo3d-navy').object3D.visible = true;
+        document.querySelector('#modelo3d-1').object3D.visible = true;
       });
     </script>
     <script src="js/ilumaone.js"></script>
